@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astralis GPT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grid-container">
+        <div class="topbar">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="Astralis UI icons and Logo/logo.svg" alt="University Logo">
+                </div>
+            </div>    
+            <div class="account-button" id="account-button">
+                <img src="Astralis UI icons and Logo/Account.svg" alt="Account button">
+            </div>
+        </div>
+        <div class="sidebar" id="sidebar">
+            <div class="menu-button" id="menuButton">
+                <img src="Astralis UI icons and Logo/menu-icon.svg" alt="Menu Icon">
+            </div>
+            <div class="new-chat-button">
+                <img src="Astralis UI icons and Logo/new-chat-icon.svg" alt="New Chat button">
+            </div>
+            <div class="chat-history hidden" id="chat-history-container" >
+                <nav class="side-nav" id="chatHistoryNav">
+                </nav>
+            </div>
+            <div id="optionsPopup" class="options-popup">
+                <ul>
+                    <li id="renameOption">Rename</li>
+                    <li id="archiveOption">Archive</li>
+                    <li id="shareOption">Share</li>
+                    <li id="deleteOption">Delete</li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="greeting">
+                <h1>Hello, Student</h1>
+                <p>How may I assist you today?</p>
+            </div>
+            <div class="prompts">
+                <button class="prompt-button" data-prompt="Why can I not see my marks on MYDMU?">Why can I not see my marks on MYDMU?</button>
+                <button class="prompt-button" data-prompt="I am very close to a first class / lower second class (student received 59% or 69%). Can I get it rounded up?">I am very close to a first class / lower second class (student received 59% or 69%). Can I get it rounded up?</button>
+                <button class="prompt-button" data-prompt="I failed my module. What do I do?">I failed my module. What do I do?</button>
+            </div>
+        </div>
+        <div class="chatbar-container" id="chatbarContainer">
+            <div class="chat-bar">
+                <div class="upload-files-button" id="uploadButton">
+                    <img src="Astralis UI icons and Logo/uploadicon.svg" alt="Upload button">
+                </div>
+                <input type="text" id="chatInput" placeholder="Message DMUAI">
+                <div class="send-button" id="sendButton">
+                    <img src="Astralis UI icons and Logo/sendicon.svg" alt="Send button">
+                </div>
+            </div>
+            <div class="microphone-container">
+                <div class="microphone-button" id="microphoneButton">
+                    <img src="Astralis UI icons and logo/microphoneicon.svg" alt="Microphone button">
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="popup" id="accountPopup">
+        <ul>
+            <li><a href="#" id="profile-link">Profile</a></li>
+            <li><a href="#" id="settings-link">Settings</a></li>
+            <li><a href="#" id="logout-link">Logout</a></li>
+        </ul>
+    </div>
+    <div class="modal" id="mainModal">
+        <div class="modal-content modal-content-main">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <span class="close-button" id="close-main-modal">&times;</span>
+            </div>
+            <div class="modal-container">
+                <div class="modal-sidebar">
+                    <ul>
+                        <li><a href="#" data-section="general"><img src="Astralis UI icons and Logo/General.svg">General</a></li>
+                        <li><a href="#" data-section="speech"><img src="Astralis UI icons and Logo/Speech.svg">Speech</a></li>
+                        <li><a href="#" data-section="data-controls"><img src="Astralis UI icons and Logo/Datacontrols.svg">Data Controls</a></li>
+                        <li><a href="#" data-section="connect-apps"><img src="Astralis UI icons and Logo/connectappsicon.svg">Connect Apps</a></li>
+                        <li><a href="#" data-section="security"><img src="Astralis UI icons and Logo/Security-icon.svg">Security</a></li>
+                    </ul>
+                </div>
+                <div class="modal-main">
+                    <div id="general" class="modal-section">
+                        <div class="setting-item">
+                            <p>Theme</p>
+                            <div class="dropdown">
+                                <button class="dropbtn">Select Theme</button>
+                                <div class="dropdown-content">
+                                    <a href="#">Light</a>
+                                    <a href="#">Dark</a>
+                                    <a href="#">System Default</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <p>Language</p>
+                            <div class="dropdown">
+                                <button class="dropbtn">Select Language</button>
+                                <div class="dropdown-content">
+                                    <a href="#">English</a>
+                                    <a href="#">Spanish</a>
+                                    <a href="#">French</a>
+                                    <a href="#">German</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <p>Archive chats</p>
+                            <button id="manageButton">Manage</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Archive all chats</p>
+                            <button id="archiveButton">Archive</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Delete all chats</p>
+                            <button id="deleteButton">Delete</button>
+                        </div>
+                    </div>
+                    <div id="speech" class="modal-section">
+                        <h2>Speech Settings</h2>
+                        <p>Speech settings content goes here.</p>
+                    </div>
+                    <div id="data-controls" class="modal-section">
+                        <div class="setting-item">
+                            <p>Shared links</p>
+                            <button id="manageSharedLinksButton">manage</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Export data</p>
+                            <button id="manageExportdataButton">manage</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Delete account</p>
+                            <button id="deleteAccountButton">Delete</button>
+                        </div>
+                    </div>
+                    <div id="connect-apps" class="modal-section">
+                        <div class="setting-item">
+                            <p>Upload Google Docs, Sheets, Slides and other files.</p>
+                            <button>upload</button>
+                        </div>
+                    </div>
+                    <div id="security" class="modal-section">
+                        <div class="setting-item">
+                            <p> Multifactor Authentication</p>
+                            <button id="enableButton">Enable</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Logout of all Devices</p>
+                            <button>Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="nestedModal">
+        <div class="modal-content base-modal-styles nested-styles">
+            <div class="modal-header">
+                <h2>Archive Chats</h2>
+                <span class="close-button" id="close-nested-modal">&times;</span>
+            </div>
+            <div class="modal-container">
+                <div class="chat-list">
+                    <div class="chat-item">
+                        <div class="chat-name">Chat Name 1</div>
+                        <div class="chat-date">Created on: YYYY-MM-DD</div>
+                        <div class="chat-actions">
+                            <button class="unarchive-button">Unarchive</button>
+                            <button class="delete-button">Delete</button>
+                        </div>
+                    </div>
+                    <div class="no-chats-message">
+                        No archived chats.
+                    </div>
+                    <!-- Repeat .chat-item for each archived chat -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="archiveAllModal">
+        <div class="modal-content base-modal-styles archive-all-styles">
+            <div class="modal-header">
+                <h2>Archive all chats</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to archive all chats?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelArchiveAllButton">Cancel</button>
+                <button id="confirmArchiveAllButton">Confirm</button>
+            </div>
+        </div>
+    </div>    
+    <div class="modal" id="deleteModal">
+        <div class="modal-content base-modal-styles delete-styles">
+            <div class="modal-header">
+                <h2>Clear your chat history</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to clear your history?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteButton">Cancel</button>
+                <button id="confirmDeleteButton">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="sharedLinksModal">
+        <div class="modal-content base-modal-styles shared-links-styles">
+            <div class="modal-header">
+                <h2>Shared links</h2>
+                <span class="close-button" id="close-shared-links-modal">&times;</span>
+            </div>
+            <div class="modal-container">
+                <p>Content for managing archived chats goes here.</p>
+                <!-- Additional content and actions -->
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="exportDataModal">
+        <div class="modal-content base-modal-styles export-data-styles">
+            <div class="modal-header">
+                <h2>Request data report</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to Request data report?</p>
+                <ul>
+                    <li>Your account details and chats will be included in the export.</li>
+                    <li>The data will be sent to your registered email in a downloadable file.</li>
+                    <li>The download link will expire 24 hours after you receive it.</li>
+                    <li>Processing may take some time. You'll be notified when it's ready.</li>
+                </ul>
+                <p>To proceed, click "Confirm export" below.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelRequestDataReportButton">Cancel</button>
+                <button id="confirmRequestDataReportButton">Confirm</button>
+            </div>
+        </div>
+    </div>    
+    <div class="modal" id="deleteAccountModal">
+        <div class="modal-content base-modal-styles delete-account-styles">
+            <div class="modal-header">
+                <h2>Delete account</h2>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete your account?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteAccountButton">Cancel</button>
+                <button id="confirmDeleteAccountButton">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="enableMultifactorAuthenticationModal">
+        <div class="modal-content base-modal-styles multifactor-authentication-styles">
+            <div class="modal-header">
+                <h2>Enable Multifactor authentication (MFA)</h2>
+            </div>
+            <div class="modal-body">
+                <p>You'll only be able to log in using username & password while MFA is on.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelEnableMultifactorAuthenticationButton">Cancel</button>
+                <button id="enableMFAButton">EnableMFA</button>
+            </div>
+        </div>
+    </div>              
+    <script src="scripts.js"></script>
+</body>
+</html>

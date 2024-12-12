@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astralis GPT chat interface</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="grid-container">  
+        <div class="sidebar" id="sidebar">
+            <div class="menu-button" id="menuButton">
+                <img src="Astralis UI icons and Logo/menu-icon.svg" alt="Menu Icon">
+            </div>
+            <div class="new-chat-button">
+                <img src="Astralis UI icons and Logo/new-chat-icon.svg" alt="New Chat button">
+            </div>
+            <nav class="side-nav">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </nav>
+        </div>
+        <div class="chat-history-sidebar" id="chatHistorySidebar">
+            <div class="close-chat-history" id="closeChatHistory">
+                <img src="Astralis UI icons and Logo/close-icon.svg" alt="Close Chat History">
+            </div>
+            <div class="chat-history-content">
+                <!-- Chat history content goes here -->
+                <p>Chat History 1</p>
+                <p>Chat History 2</p>
+                <p>Chat History 3</p>
+            </div>
+        </div>
+        <div class="content" id="content">
+            <div class="topbar">
+                <div class="logo-container">
+                    <div class="menu-button-topbar" id="menuButtonTopbar">
+                        <img src="Astralis UI icons and Logo/menu-topbar-icon.svg" alt="Menu Icon">
+                    </div>
+                    <div class="logo">
+                        <img src="Astralis UI icons and Logo/logo.svg" alt="University Logo">
+                    </div>
+                </div>    
+                <div class="account-button" id="account-button">
+                     <img src="Astralis UI icons and Logo/Account.svg" alt="Account button">
+                </div>
+            </div>
+            <div class="overlay" id="overlay"></div> <!-- Overlay element -->
+            <div class="main-content">
+                <div class="chat-window" id="chat-window">
+                    <div class="userchat-container">
+                        <div class="useraccount-icon">
+                            <img src="Astralis UI icons and Logo/Account.svg" alt="Account Icon">
+                        </div>
+                        <div class="editmessage-button" id="editmessage-button">
+            
+                        </div>
+                        <div class="userchat-bubble" id="userchat-bubble">
+                            <p> I failed my exam what should i do?</p> 
+                        </div>
+                    </div>
+                    <div class="gptresponse-container">
+                        <div class="gpt-icon">
+                            <img src="Astralis UI icons and Logo/gpt icon.svg" alt="gpt-icon">
+                        </div>
+                        <div class="gptresponse-bubble" id="gptresponse-bubble">
+                            <p>Login to MyDMU:
+                                Use your credentials to log in to the MyDMU portal.
+                                Navigate to "Student Overview":
+                                Once logged in, locate and click on the "Student Overview" section. This might be on the homepage or in a menu.
+                                Access "Personal Details":
+                                Within the "Student Overview," find the section labeled "Personal Details." Click on this section to access details about yourself.
+                                Locate "Personal Tutor":
+                                In the "Personal Details" section, scroll or look for information related to your personal tutor. The personal tutor's name and contact details should be displayed.
+                                Contact Your Personal Tutor :
+                                Double click on the name of your personal tutor. This should take you to the page with the contact details.</p>
+                            <div class="functional-icons"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatbar-container" id="chatbarContainer">
+                    <div class="chat-bar">
+                        <div class="upload-files-button">
+                            <img src="Astralis UI icons and Logo/uploadicon.svg" alt="Upload button">
+                        </div>
+                        <input type="text" id="chat-input" placeholder="Message DMUAI">
+                        <div class="send-button" id="send-icon">
+                            <img src="Astralis UI icons and Logo/sendicon.svg" alt="Send button">
+                        </div>
+                    </div>
+                    <div class="microphone-container">
+                        <div class="microphone-button" id="microphoneicon">
+                            <img src="Astralis UI icons and Logo/microphoneicon.svg" alt="Microphone button">
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="account-popup">
+        <ul>
+            <li><a href="#" id="profile-link">Profile</a></li>
+            <li><a href="#" id="settings-link">Settings</a></li>
+            <li><a href="#" id="logout-link">Logout</a></li>
+        </ul>
+    </div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <span class="close-button" id="close-button">&times;</span>
+            </div>
+            <div class="modal-container">
+                <div class="modal-sidebar">
+                    <ul>
+                        <li><a href="#" data-section="general">General</a></li>
+                        <li><a href="#" data-section="speech">Speech</a></li>
+                        <li><a href="#" data-section="data-controls">Data Controls</a></li>
+                        <li><a href="#" data-section="connect-apps">Connect Apps</a></li>
+                        <li><a href="#" data-section="security">Security</a></li>
+                    </ul>
+                </div>
+                <div class="modal-main">
+                    <div id="general" class="modal-section">
+                        <div class="setting-item">
+                            <p>Theme</p>
+                            <div class="dropdown">
+                                <button class="dropbtn">Select Theme</button>
+                                <div class="dropdown-content">
+                                    <a href="#">Light</a>
+                                    <a href="#">Dark</a>
+                                    <a href="#">System Default</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <p>Language</p>
+                            <div class="dropdown">
+                                <button class="dropbtn">Select Language</button>
+                                <div class="dropdown-content">
+                                    <a href="#">English</a>
+                                    <a href="#">Spanish</a>
+                                    <a href="#">French</a>
+                                    <a href="#">German</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <p>Archive chats</p>
+                            <button>Manage</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Archive all chats</p>
+                            <button>Archive</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Delete all chats</p>
+                            <button>Delete</button>
+                        </div>
+                    </div>
+                    <div id="speech" class="modal-section">
+                        <h2>Speech Settings</h2>
+                        <p>Speech settings content goes here.</p>
+                    </div>
+                    <div id="data-controls" class="modal-section">
+                        <div class="setting-item">
+                            <p>Shared links</p>
+                            <button>manage</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Export data</p>
+                            <button>manage</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Delete</p>
+                            <button>Delete</button>
+                        </div>
+                    </div>
+                    <div id="connect-apps" class="modal-section">
+                        <div class="setting-item">
+                            <p>Upload Google Docs, Sheets, Slides and other files.</p>
+                            <button>upload</button>
+                        </div>
+                    </div>
+                    <div id="security" class="modal-section">
+                        <div class="setting-item">
+                            <p> Multifactor Authentication</p>
+                            <button>Enable</button>
+                        </div>
+                        <div class="setting-item">
+                            <p>Logout of all Devices</p>
+                            <button>Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts2.js"></script>
+</body>
+</html>

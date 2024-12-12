@@ -1,0 +1,643 @@
+
+* ::before,
+* ::after {
+    box-sizing: border-box;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Andika, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 70px 1fr 1fr;
+    grid-template-rows: 70px 1fr 90px;
+    grid-template-areas: 
+     "sidebar topbar topbar"
+     "sidebar main-content main-content"
+     "sidebar chatbar-container chatbar-container";
+    height: 100vh;
+    transition: grid-template-columns 0.3s ease; /* Transition for grid-template-columns */
+  }
+  
+  /* Expanded state */
+  .grid-container.expanded {
+    grid-template-columns: 250px 1fr 1fr; /* Updated layout for expanded sidebar */
+  }
+  
+  /* Default sidebar style */
+  .sidebar {
+    background-color: #A81C36;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    gap: 10px;
+    transition: width 0.3s ease; /* Transition for width */
+  }
+  
+  @media (max-width: 768px) {
+    .menu-button-topbar {
+        display: flex; /* Show menu button on smaller screens */
+    }
+  }
+  
+  /* Positioning of the menu button when sidebar is collapsed */
+  @media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        visibility: hidden;
+    }
+  
+    .sidebar.expanded {
+        transform: translateX(0);
+        visibility: visible;
+    }
+  
+    .grid-container {
+        grid-template-columns: 0 1fr; 
+    }
+  }
+  
+  .topbar{
+    grid-area: topbar;
+  }
+  .sidebar{
+    grid-area: sidebar;
+  }
+  .main-content{
+    grid-area: main-content;
+  }
+  .chatbar-container{
+    grid-area: chatbar-container;
+  }
+
+.menu-button {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;  
+}
+.new-chat-button{
+    width: 30px;
+    height: 30px;
+}
+
+.menu-button img,
+.new-chat-button img,
+.side-nav a {
+    display: inline-block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.menu-button img {
+    width: 30px;
+    height: 30px;
+}
+.new-chat-button img{
+    width: 30px;
+    height: 30px;
+}
+
+#chat-history-container.hidden {
+    display: none;
+}
+
+/* Chat history styles */
+#chat-history-container {
+    padding: 10px;
+    background-color: #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.chat-link {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-radius: 4px;
+    color: #333;
+    text-decoration: none;
+    position: relative;
+}
+
+.chat-link:hover, .chat-link.selected {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+.chat-link .options-icon {
+    display: none;
+    cursor: pointer;
+}
+
+.chat-link:hover .options-icon, .chat-link.selected .options-icon {
+    display: inline-block;
+}
+
+.options-popup {
+    position: absolute;
+    display: none;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px;
+}
+
+.options-popup ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.options-popup ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.options-popup ul li:hover {
+    background-color: #f0f0f0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #fff;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+    width: 100px;
+}
+.account-button {
+    padding-right: 20px;
+
+}
+.account-button img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+.main-content {
+    flex: 1;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+}
+.greeting {
+    text-align: center;
+    
+}
+.greeting h1 {
+    font-size:2.5em;
+    margin: 0;
+    background: linear-gradient(to left, #C20F41, #370312);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.greeting p {
+    font-size: 2em;
+    margin: 10px 0 0 0;
+    color:#C20F41
+}
+
+.prompts {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: nowrap;
+    margin-top: 70px;
+    overflow-x: auto;
+}
+
+.prompts button {
+    background-color: #fff;
+    border:3px solid;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: Andika;
+    font-size: 1em;
+    color: #890012;
+    position: relative;
+}
+
+.prompts button:hover {
+    background-color:#f7d8d9;
+}
+
+.prompts button:first-child,
+.prompts button:last-child {
+    width:200px;
+    height:100px; 
+    margin-top:30px;
+}
+
+.prompts button:nth-child(2) {
+    width: 300px;
+    height: 150px; 
+    
+}
+.chatbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.chat-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7d8d9;
+    border-radius: 50px;
+    padding: 6px;
+    width: 80%;
+    height: 45px;
+    max-width: 650px;
+    margin-bottom:3vh;
+}
+
+.chat-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0 10px;
+    color: black;
+    flex-grow: 1;
+    font-family: Andika;
+}
+input::placeholder {
+    color: #E47795; /* Change this to the desired color */
+    font-family: Andika;
+}
+.upload-files-button{
+    padding-left: 20px;
+}
+.send-button{
+    padding: 40px;
+}
+.microphone-container {
+    align-items: center;
+    background-color:#f7d8d9;
+    height: 25px;
+    width:  25px;
+    border-radius: 35px;
+    padding: 15px;
+    margin-left:10px;
+    margin-bottom: 3vh;
+}
+.upload-files-button img,
+.send-button img {
+    height: 22px;
+    width: 22px;
+    cursor: pointer;
+}
+.microphone-button img {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+/* Add transition for sidebar toggle */
+.sidebar {
+    transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    top: 0%;
+    right: 2em;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-width: 200px;
+    max-height: 300px;
+    border-radius: 15px;
+}
+.popup ul{
+    list-style-type: none;
+    padding: 20px;
+}
+.popup ul a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 5px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.popup ul a:hover {
+    background-color :#EBBDC5;
+}
+
+#accountPopup {
+    top: 60px;
+    right: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* overflow: auto; Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+/* Modal-content-main Styles */
+.modal-content-main {
+    background: linear-gradient(to left, #C20F41, #370312);
+    margin: 5% auto; /* 15% from the top and centered */
+    padding:0;
+    border:none;
+    height:auto;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 700px; /* Maximum width */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 15px;
+}
+.modal-sidebar {
+    flex: 1;
+    background-color: none;
+    padding: 10px;
+}
+.modal-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.modal-sidebar li {
+    margin-bottom: 0px;
+}
+.modal-sidebar a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center; 
+    padding: 5px;
+    width: 80%;
+    border-radius: 4px;
+}
+.modal-sidebar a img {
+    margin-right: 5px; /* Space between icon and text */
+    width: 15px; /* Set a consistent size for icons */
+    height: 15px;
+    object-fit: contain; /* Ensure the icon scales correctly */
+}
+.modal-sidebar a.active {
+    background-color:#EBBDC5
+}
+.modal-main {
+    flex: 3;
+    padding: 10px 20px 10px 10px;
+}
+.modal-section {
+    display: none;
+}
+.modal-section.active {
+    display: block;
+}
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+    margin-bottom : 7px;
+    border-bottom: 1px solid #888;
+}
+.setting-item p {
+    margin: 0;
+}
+.setting-item button {
+    padding: 7px;
+    font-size: 15px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    font-family: Andika;
+    background-color: white;
+    cursor: pointer;
+}
+.setting-item button:hover {
+    background-color: #EBBDC5;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.dropbtn:hover {
+    background-color: #ddd;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 5px;
+}
+.dropdown-content a:hover {
+    background-color: #EBBDC5;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+.base-modal-styles {
+    background: linear-gradient(to left, #C20F41, #370312);
+    margin: 15% auto; /* 15% from the top and centered */
+    padding:0;
+    border:none;
+    height:auto;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 900px; /* Maximum width */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 15px;
+}
+.delete-styles,
+.archive-all-styles,
+.export-data-styles, 
+.delete-account-styles,
+.multifactor-authentication-styles{
+    margin: 10% auto; /* Centered with some margin from the top */
+    height:fit-content;
+    width: 400px;
+}
+.modal-body {
+    background-color: white;
+    display: flex;
+    width: 100%;
+}
+.modal-footer {
+    border-bottom-left-radius: 15px; 
+    border-bottom-right-radius:15px;
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    gap: 10px;
+}
+.modal-footer button {
+    background-color:white;
+    font-family: Andika;
+    font-size: 15px;
+    border-radius: 50px;
+    border: 2px solid;
+    padding: 6px 20px;
+    cursor: pointer;
+}
+.modal-body p{
+    padding: 10px;
+}
+.modal-body ul{
+    padding-left: 30px;
+    font-size: 14px;
+}
+#confirmDeleteButton {
+    border: 2px solid red;
+    color: red; 
+}
+#confirmArchiveAllButton {
+    background-color: #890012;
+    color:white; 
+}
+#confirmRequestDataReportButton {
+    border: 2px solid red;
+    color: red; 
+}
+#confirmDeleteAccountButton {
+    border: 2px solid red;
+    color: red; 
+}
+#enableMFAButton {
+    border: 2px solid red;
+    color: red; 
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+.modal-header h2 {
+    margin: 0;
+    color: #fff;
+}
+
+.modal-container {
+    border-bottom-left-radius: 15px; /* Adjust the radius as needed */
+    border-bottom-right-radius:15px; 
+    background-color: white;
+    display: flex;
+    width: 100%;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.chat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Divider between items */
+    margin-bottom: 10px;
+}
+
+.chat-details {
+    flex: 1;
+}
+
+.chat-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.chat-date {
+    color: #555;
+}
+
+.chat-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.unarchive-button,
+.delete-button {
+    background-color: #C20F41; /* Example color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.unarchive-button:hover,
+.delete-button:hover {
+    background-color: #370312; /* Darker shade on hover */
+}
+.no-chats-message {
+    display: none; /* Initially hidden */
+    text-align: center;
+    font-size: 16px;
+    color: #999; /* Light gray color */
+    padding: 20px;
+}

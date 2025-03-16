@@ -26,5 +26,5 @@ Astralis is a chatbot interface that helped me understand web development basics
 ## 📥 Installation & Setup  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/astralis-university.git
+   git clone https://github.com/JoelMun99/astralis-university.git
    cd astralis-university
